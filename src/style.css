@@ -1,0 +1,70 @@
+body{
+    min-height: 100vh;
+}
+
+
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    height: 100vh;
+    grid-template-rows: 1fr;
+}
+
+.tabs{
+    grid-column: 1/2;
+    border-right: 1px solid rgb(167, 167, 167); /* Add a solid black border on the right side of the tabs container */
+    padding-right: 10px; /* Adjust as needed to create space between the border and the content inside */
+    grid-row: 1;
+}
+
+.tabs-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#incoming-tab,#today-tab, #projects-tab{
+    display: flex;
+    gap: 5px;
+    border: none;
+    padding: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
+
+
+.tabs-container button {
+    display: flex;
+    align-items: center; 
+}
+
+.tabs-container i {
+    display: inline-block; 
+    margin-right: 5px; 
+}
+
+#incoming-tab:hover, #today-tab:hover, #projects-tab:hover {
+    background-color: rgb(226, 238, 238);
+}
+
+
+.logo{
+    color: rgb(0, 138, 252);
+}
+
+@font-face {
+    font-family: ra;
+    src: url("/src/fonts/raillinc/Raillinc.otf") format(otf);
+}
+
+.logo{
+    font-family: 'fa', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 8px;
+    padding-top: 5px;
+    padding-bottom: 40px;
+}
