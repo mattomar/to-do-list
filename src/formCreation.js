@@ -1,3 +1,5 @@
+import { appendFormToContent } from "./DOM";
+appendFormToContent()
 
 const fixedButton = document.querySelector('.fixed-button');
 const popUp = document.querySelector('.popup-modal'); 
@@ -7,6 +9,7 @@ export function openForm() {
 
     fixedButton.addEventListener('click', function () {
         popUp.style.display = "flex"
+        
     });
 
 }
