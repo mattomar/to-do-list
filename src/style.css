@@ -144,3 +144,45 @@ body {
     margin-top: 500px;
     margin-left: 40px;
 }
+
+
+
+.popup-modal {
+    display: none;
+    position: fixed; /* Position the modal */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the modal */
+    background-color: #fff; /* Background color */
+    padding: 100px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Drop shadow */
+}
+
+.popup-modal h2 {
+    margin-top: 0; /* Remove default margin */
+}
+
+.popup-modal label {
+    display: block; /* Display labels on new lines */
+    margin-bottom: 10px; /* Add some spacing between labels */
+}
+
+.popup-modal input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 8px; /* Padding */
+    margin-bottom: 10px; /* Add some spacing between input fields */
+}
+
+.popup-modal button {
+    padding: 8px 16px; /* Padding */
+    background-color: #0091ff; /* Background color */
+    color: #fff; /* Text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor style */
+}
+
+.popup-modal button:hover {
+    background-color: #0077cc; /* Darker background color on hover */
+}
