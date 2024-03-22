@@ -40,3 +40,29 @@ export function closeForm() {
         }
     });
 }
+
+
+
+
+export function getSubmittedName(callback) {
+    const form = document.getElementById('projectForm');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const projectName = form.elements.projectName.value;
+
+        // Add the project name as a new tab under Projects
+        callback(projectName);
+
+        // Reset the form
+        form.reset();
+    });
+}
+
+export function createProjectTab(projectName) {
+    const projectTab = document.createElement('button');
+    projectTab.textContent = projectName;
+    projectTab.classList.add('project-tab');
+    return projectTab;
+}
