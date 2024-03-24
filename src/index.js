@@ -14,3 +14,4 @@ getSubmittedName(function(projectName) {
     const projectsTabContainer = document.querySelector('.tabs-container');
     projectsTabContainer.appendChild(projectTab);
 });
+

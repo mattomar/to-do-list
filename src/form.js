@@ -60,6 +60,6 @@ export function getSubmittedName(callback) {
 export function createProjectTab(projectName) {
     const projectTab = document.createElement('button');
     projectTab.textContent = projectName;
-    projectTab.classList.add('project-tab');
+    projectTab.classList.add('sub-tab');
     return projectTab;
 }
