@@ -6,12 +6,10 @@ const popUp = document.querySelector('.popup-modal');
 
 
 export function openForm() {
-
     fixedButton.addEventListener('click', function () {
-        popUp.style.display = "flex"
-        
+        popUp.style.display = "flex";
     });
-
+    console.log("Fixed button:", fixedButton);
 }
 
 export function closeForm() {
@@ -40,7 +38,6 @@ export function closeForm() {
         }
     });
 }
-
 
 
 
