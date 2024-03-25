@@ -204,7 +204,7 @@ body {
     box-shadow: none; /* Remove box shadow */
     border: 1px solid rgb(206, 206, 206); /* Add bottom border */
     overflow: hidden; /* Hide overflowed content */
-    max-width: 130px; 
+    width: 100px; 
 
 
 }
@@ -229,3 +229,26 @@ body {
     margin-left: 20px; /* Increase left margin for sub-tabs except the first one */
 }
 
+
+.projects-container-wrapper {
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 15px; /* Add some padding to prevent content from touching the scrollbar */
+}
+
+.projects-container-wrapper::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+.projects-container-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background color of the scrollbar track */
+}
+
+.projects-container-wrapper::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Border radius of the scrollbar thumb */
+}
+
+.projects-container-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar thumb on hover */
+}
