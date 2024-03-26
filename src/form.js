@@ -3,13 +3,17 @@ appendFormToContent()
 
 const fixedButton = document.querySelector('.fixed-button');
 const popUp = document.querySelector('.popup-modal'); 
+const contentDiv = document.getElementById('content');
+
 
 
 export function openForm() {
     fixedButton.addEventListener('click', function () {
         popUp.style.display = "flex";
+        console.log("wew")
+        contentDiv.appendChild(popUp);
     });
-    console.log("Fixed button:", fixedButton);
+    
 }
 
 export function closeForm() {
@@ -62,4 +66,14 @@ export function createProjectTab(projectName) {
     projectTab.textContent = projectName;
     projectTab.classList.add('sub-tab');
     return projectTab;
+}
+
+
+export function handleSubTabClick(event) {
+    // Check if the clicked element is a sub-tab button
+    if (event.target.classList.contains('sub-tab')) {
+        const projectName = event.target.textContent;
+        // Update the content with the name of the clicked tab
+        document.getElementById('content').textContent = projectName;
+    }
 }

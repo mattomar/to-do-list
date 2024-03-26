@@ -1,3 +1,9 @@
+export function setHTMLContent(html) {
+    const contentDiv = document.getElementById("content")
+    contentDiv.innerHTML = html
+}
+
+
 
 export function appendFormToContent() {
     const formContent = `<div class="popup-modal" id="projectFormModal">
@@ -9,24 +15,22 @@ export function appendFormToContent() {
         </form>
     </div>`;
 
-    const contentDiv = document.getElementById("content");
-    contentDiv.insertAdjacentHTML('beforeend', formContent); 
+    setHTMLContent(formContent)
 }
 
 
-export function appendHomeToContent() {
-    const homeContent = `<div class="home-container">
+export function appendIncomingToContent() {
+    const incomingContent = `<div class="home-container">
     <div class="home-header">
         <i class="fas fa-inbox" style="color: #0091ff; font-size: 22px;"></i>
         <p style="font-size: 22px;">Incoming</p>
     </div>
 </div>`;
 
-    const contentDiv = document.getElementById("content");
-    contentDiv.insertAdjacentHTML('beforeend', homeContent); 
+setHTMLContent(incomingContent)
+
 
 }
-
 
 
 

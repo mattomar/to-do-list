@@ -1,3 +1,12 @@
+
+import { appendIncomingToContent } from "./DOM";
+
+document.addEventListener('DOMContentLoaded',() =>{
+    const incomingTab = document.getElementById('incoming-tab')
+    incomingTab.addEventListener('click', appendIncomingToContent)
+})
+
+
 import { openForm, closeForm} from "./form";
 openForm()
 closeForm()
@@ -16,3 +25,9 @@ getSubmittedName(function(projectName) {
     // Append the new project tab to the wrapper container
     projectsContainerWrapper.appendChild(projectTab);
 });
+
+
+
+import { handleSubTabClick } from "./form";
+
+document.addEventListener('click', handleSubTabClick);
