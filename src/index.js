@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded',() =>{
 })
 
 
-import { openForm, closeForm} from "./form";
+
+import { openForm, closeForm, } from "./form";
 openForm()
 closeForm()
+
 
 import { getSubmittedName } from "./form";
 import { createProjectTab } from "./form"; // Import the createProjectTab function
@@ -28,6 +30,11 @@ getSubmittedName(function(projectName) {
 
 
 
+
 import { handleSubTabClick } from "./form";
 
 document.addEventListener('click', handleSubTabClick);
+
+
+
+

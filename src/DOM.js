@@ -13,7 +13,30 @@ export function appendFormToContent() {
             <input type="text" name="projectName" required>
             <button type="submit">Create Project</button>
         </form>
-    </div>`;
+    </div>
+    
+    <form id="taskForm">
+    <label for="taskName">Task Name:</label><br>
+    <input type="text" id="taskName" name="taskName" required><br>
+
+    <label for="startDate">Start Date:</label><br>
+    <input type="date" id="startDate" name="startDate" required><br>
+
+    <label for="finishDate">Finish Date:</label><br>
+    <input type="date" id="finishDate" name="finishDate" required><br>
+
+    <label for="priorityLevel">Priority Level:</label><br>
+    <select id="priorityLevel" name="priorityLevel" required>
+        <option value="">Select Priority</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select><br>
+
+    <button type="submit">Submit</button>
+    </form>
+    
+    `;
 
     setHTMLContent(formContent)
 }
@@ -27,10 +50,11 @@ export function appendIncomingToContent() {
     </div>
 </div>`;
 
-setHTMLContent(incomingContent)
+    setHTMLContent(incomingContent)
 
 
 }
+
 
 
 

@@ -111,13 +111,11 @@ body {
 #content {
     grid-column: 2/3;
     grid-row: 2/13;
-    margin-left: 100px;
-    margin-right: 70px;
+    margin-left: 50px;
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     border-radius: 20px;
-
-
+    position: relative;
 }
 
 .home-container {
@@ -251,4 +249,68 @@ body {
 
 .projects-container-wrapper::-webkit-scrollbar-thumb:hover {
     background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+
+
+#buttonForTabContainer {
+    display: flex;
+    justify-content: center;
+    align-self: flex-end; /* Align the container to the end of its parent */
+}
+
+
+#buttonForTab {
+    background-color: #0091ff; /* Set background color to blue */
+    border-radius: 10px;
+    color: white; /* Set text color to white */
+    padding: 10px 20px; /* Add padding for better appearance */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Add cursor pointer */
+    font-size: 14px; /* Set font size */
+}
+
+#taskForm {
+    display: none;
+    position: fixed;
+    top: 55%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Center the content */
+}
+
+#taskForm h2 {
+    margin-top: 0;
+}
+
+#taskForm label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#taskForm input[type="text"],
+#taskForm input[type="date"],
+#taskForm select {
+    width: calc(100% - 20px); /* Adjusted width to account for padding */
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#taskForm button[type="submit"] {
+    padding: 8px 16px;
+    background-color: #0091ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#taskForm button[type="submit"]:hover {
+    background-color: #0077cc;
 }

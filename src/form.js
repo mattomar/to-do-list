@@ -10,7 +10,6 @@ const contentDiv = document.getElementById('content');
 export function openForm() {
     fixedButton.addEventListener('click', function () {
         popUp.style.display = "flex";
-        console.log("wew")
         contentDiv.appendChild(popUp);
     });
     
@@ -69,11 +68,41 @@ export function createProjectTab(projectName) {
 }
 
 
+
+
+
+let buttonForTab;
+
 export function handleSubTabClick(event) {
-    // Check if the clicked element is a sub-tab button
     if (event.target.classList.contains('sub-tab')) {
-        const projectName = event.target.textContent;
-        // Update the content with the name of the clicked tab
-        document.getElementById('content').textContent = projectName;
+        // Check if the button already exists, if not, create and append it
+        if (!buttonForTab) {
+            buttonForTab = document.createElement('button');
+            buttonForTab.setAttribute('id', 'buttonForTab');
+            buttonForTab.textContent = "Add a task"; // Set text content
+
+            const buttonForTabContainer = document.createElement('div');
+            buttonForTabContainer.setAttribute('id', 'buttonForTabContainer');
+            buttonForTabContainer.appendChild(buttonForTab);
+
+            document.getElementById('content').appendChild(buttonForTabContainer);
+
+            // Add event listener to the button to show the task form
+            buttonForTab.addEventListener('click', function() {
+                
+                toggleTaskFormVisibility();
+            });
+        }
+
+        return buttonForTab; 
+    }
+}
+
+function toggleTaskFormVisibility() {
+    const taskPopUp = document.getElementById('taskForm'); // Remove the '#' symbol
+    if (taskPopUp.style.display === 'none' || !taskPopUp.style.display) { // Check for both 'none' and undefined
+        taskPopUp.style.display = 'block';
+    } else {
+        taskPopUp.style.display = 'none';
     }
 }
