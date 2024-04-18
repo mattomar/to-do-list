@@ -1,23 +1,15 @@
-
-import { appendIncomingToContent } from "./DOM";
-
-document.addEventListener('DOMContentLoaded',() =>{
-    const incomingTab = document.getElementById('incoming-tab')
-    incomingTab.addEventListener('click', appendIncomingToContent)
-})
+import { showIncoming } from "./incoming";
+import { openForm, closeForm, getSubmittedName, createProjectTab, getSubmittedForm } from "./form";
 
 
-
-import { openForm, closeForm, } from "./form";
-openForm()
-closeForm()
-
-
-import { getSubmittedName } from "./form";
-import { createProjectTab } from "./form"; // Import the createProjectTab function
+// Call the functions
+showIncoming();
+openForm();
+closeForm();
 
 // Call getSubmittedName to handle the submission of the project name
-getSubmittedName(function(projectName) {
+getSubmittedName(function(projectName, event) {
+    event.preventDefault(); // Prevent form submission
     // Create a new tab for the submitted project name
     const projectTab = createProjectTab(projectName);
     
@@ -30,10 +22,6 @@ getSubmittedName(function(projectName) {
 
 
 
-
-import { handleSubTabClick } from "./form";
-
-document.addEventListener('click', handleSubTabClick);
 
 
 

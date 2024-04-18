@@ -1,2 +1,7 @@
 import { appendIncomingToContent } from "./DOM";
-appendIncomingToContent()
+
+export function showIncoming() {
+    const incomingTab = document.getElementById('incoming-tab');
+    incomingTab.addEventListener('click', appendIncomingToContent);
+}
+
