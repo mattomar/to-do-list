@@ -76,6 +76,50 @@ export function appendIncomingToContent() {
 
     <button type="submit"">Submit</button>
     </form>
+    <div id="incoming-tab-content">
+    </div>
+`;
+
+    setHTMLContent(incomingContent)
+
+
+}
+
+
+export function appendTodayToContent() {
+    const incomingContent = `<div class="today-container">
+    <div class="today-header">
+    <i class="fa-regular fa-star" style="color: #ffae00;"></i>
+    <p style="font-size: 22px;">Today</p>
+    </div>
+</div>
+
+
+
+
+
+    <form id="taskForm">
+    <label for="taskName">Task Name:</label><br>
+    <input type="text" id="taskName" name="taskName" required><br>
+
+    <label for="startDate">Start Date:</label><br>
+    <input type="date" id="startDate" name="startDate" required><br>
+
+    <label for="finishDate">Finish Date:</label><br>
+    <input type="date" id="finishDate" name="finishDate" required><br>
+
+    <label for="priorityLevel">Priority Level:</label><br>
+    <select id="priorityLevel" name="priorityLevel" required>
+        <option value="">Select Priority</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select><br>
+
+    <button type="submit"">Submit</button>
+    </form>
+    <div id="today-tab-content">
+    </div>
 `;
 
     setHTMLContent(incomingContent)

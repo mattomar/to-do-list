@@ -1,4 +1,5 @@
-import { appendFormToContent, appendButtonContainerToContent } from "./DOM";
+import { appendFormToContent, appendButtonContainerToContent, appendIncomingToContent, appendTodayToContent } from "./DOM";
+import { isToday } from "date-fns";
 
 appendFormToContent();
 
@@ -155,7 +156,7 @@ export function createButtonForTab() {
 
 
 
-let currentProjectTabID = null; 
+let currentProjectTabID = null;
 
 export function createProjectTab(projectName) {
 
@@ -170,6 +171,7 @@ export function createProjectTab(projectName) {
     tabContent.classList.add('tab-content');
     tabContent.id = tabID
     contentArray.push(tabContent);
+
 
 
     projectTab.addEventListener('click', () => {
@@ -202,6 +204,13 @@ const projectTabs = [];
 const contentArray = [];
 
 
+function addToTaskCardArray(taskCard) {
+    taskCardArray.push(taskCard);
+    console.log(taskCardArray)
+}
+
+const taskCardArray = []
+
 function createTaskCard(taskName, startDate, finishDate, priorityLevel) {
     const taskCard = document.createElement('div');
     taskCard.classList.add('task-card');
@@ -224,10 +233,15 @@ function createTaskCard(taskName, startDate, finishDate, priorityLevel) {
     taskCard.appendChild(startDateElement);
     taskCard.appendChild(finishDateElement);
     taskCard.appendChild(priorityLevelElement);
+
+    taskCard.dataset.finishDate = finishDate;
     appendTaskCardToProject(taskCard)
+    addToTaskCardArray(taskCard)
+
 
 
 }
+
 
 
 function appendTaskCardToProject(taskCard) {
@@ -239,6 +253,7 @@ function appendTaskCardToProject(taskCard) {
         if (tabContent.id === currentProjectTabID) {
             // Append the task card to the tab content
             tabContent.appendChild(taskCard);
+
             break; // Exit the loop once the match is found and task card is appended
         }
     }
@@ -252,6 +267,47 @@ function toggleTaskFormVisibility() {
         taskPopUp.style.display = 'none';
     }
 }
+
+
+
+export function moveTaskCardsToIncomingTab() {
+    const incomingTabContent = document.getElementById('incoming-tab-content');
+
+
+    // Iterate through the taskCardArray
+    for (let i = 0; i < taskCardArray.length; i++) {
+        const taskCard = taskCardArray[i];
+        const clonedTaskCard = taskCard.cloneNode(true);
+
+        // Clone the task card
+
+        // Append the cloned task card to the incoming tab content area
+        incomingTabContent.appendChild(clonedTaskCard);
+
+    }
+
+}
+
+const tasksForToday = [];
+
+ export function appendTaskCardToTasksForTodayArray() {
+    const todayTab = document.getElementById('today-tab-content')
+    for (let i = 0; i < taskCardArray.length; i++) {
+        const taskCard = taskCardArray[i];
+        const finishDate = new Date(taskCard.dataset.finishDate);
+        if (isToday(finishDate)) {
+            // Clone and push the task card only if today's date is equal to the finish date
+            const clonedTaskCard = taskCard.cloneNode(true);
+            tasksForToday.push(clonedTaskCard);
+            todayTab.appendChild(clonedTaskCard);
+        }
+
+
+    }
+    console.log(tasksForToday)
+}
+
+
 
 
 
