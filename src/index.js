@@ -1,11 +1,13 @@
 import { showIncoming } from "./incoming";
 import { openForm, closeForm, getSubmittedName, createProjectTab, getSubmittedForm } from "./form";
 import { showToday } from "./today";
+import { showProject } from "./projects";
 
 
 // Call the functions
 showIncoming();
 showToday()
+showProject()
 openForm();
 closeForm();
 
