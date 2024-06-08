@@ -143,6 +143,7 @@ export function createButtonForTab() {
     buttonForTab.addEventListener('click', () => {
         toggleTaskFormVisibility();
         getSubmittedForm(createTaskCard)
+        
     });
 
     // Create buttonForTabContainer and append buttonForTab
@@ -154,12 +155,16 @@ export function createButtonForTab() {
     document.getElementById('content').appendChild(newButtonForTabContainer);
 }
 
-
+export function addProjectNameToContent(projectName) {
+    const projectNameDiv = document.createElement('div');
+    projectNameDiv.classList.add('project-name');
+    projectNameDiv.textContent = `Project Name: ${projectName}`;
+    document.getElementById('content').appendChild(projectNameDiv);
+}
 
 let currentProjectTabID = null;
 
 export function createProjectTab(projectName) {
-
     const projectTab = document.createElement('button');
     projectTab.textContent = projectName;
     projectTab.classList.add('sub-tab');
@@ -169,11 +174,8 @@ export function createProjectTab(projectName) {
 
     const tabContent = document.createElement('div');
     tabContent.classList.add('tab-content');
-    tabContent.id = tabID
+    tabContent.id = tabID;
     contentArray.push(tabContent);
-
-
-
 
     projectTab.addEventListener('click', () => {
         // Hide all content elements
@@ -181,25 +183,32 @@ export function createProjectTab(projectName) {
             content.style.display = 'none';
         });
         // Show the corresponding content
-        appendFormToContent()
+        appendFormToContent();
         tabContent.style.display = 'block';
-        createButtonForTab()
-        document.getElementById('content').appendChild(tabContent)
-        currentProjectTabID = tabID;
-        console.log(currentProjectTabID)
-
+        createButtonForTab();
+        addProjectNameToContent(projectName); 
+        document.getElementById('content').appendChild(tabContent);
+        currentProjectTabID = tabID; // Update the current project ID
+        console.log(currentProjectTabID);
     });
-    
+
 
 
     // Push the created tab into the array
     projectTabs.push(projectTab);
-    console.log(projectTabs)
-    console.log(contentArray)
+    console.log(projectTabs);
+    console.log(contentArray);
 
+
+
+
+
+    
 
     return projectTab;
 }
+
+
 
 // Create an array to hold the tabs
 const projectTabs = [];
@@ -237,9 +246,7 @@ function setColorByPriority(priorityLevelElement, priorityLevel) {
 
 
 
-
-
-function createTaskCard(taskName, startDate, finishDate, priorityLevel) {
+function createTaskCard(taskName, startDate, finishDate, priorityLevel, parentId) {
     const taskCard = document.createElement('div');
     taskCard.classList.add('task-card');
 
@@ -258,7 +265,6 @@ function createTaskCard(taskName, startDate, finishDate, priorityLevel) {
     priorityLevelElement.classList.add('priority'); // Add a class to the priority element
     setColorByPriority(priorityLevelElement, priorityLevel);
 
-
     const trashIcon = document.createElement('i');
     trashIcon.classList.add('fa-solid', 'fa-trash');
     trashIcon.addEventListener('click', function () {
@@ -266,25 +272,27 @@ function createTaskCard(taskName, startDate, finishDate, priorityLevel) {
         taskCard.remove(); // Remove the task card from the DOM when trash icon is clicked
     });
 
-
-
     // Append task details to task card
     taskCard.appendChild(taskNameElement);
     taskCard.appendChild(startDateElement);
     taskCard.appendChild(finishDateElement);
     taskCard.appendChild(priorityLevelElement);
-    taskCard.appendChild(trashIcon)
+    taskCard.appendChild(trashIcon);
 
     taskCard.dataset.finishDate = finishDate;
-    
-    appendTaskCardToProject(taskCard)
-    addToTaskCardArray(taskCard)
-    sortTaskCardsByPriority()
 
+    // Append the task card to the parent element
+    const parentElement = document.getElementById(parentId);
+    if (parentElement) {
+        parentElement.appendChild(taskCard);
+    } else {
+        console.error("Parent element not found with ID: " + parentId);
+    }
 
-
+    appendTaskCardToProject(taskCard);
+    addToTaskCardArray(taskCard);
+    sortTaskCardsByPriority();
 }
-
 
 function getPriorityValue(taskCard) {
     const priorityText = taskCard.querySelector('.priority').textContent.split(': ')[1].toLowerCase();
@@ -292,23 +300,23 @@ function getPriorityValue(taskCard) {
     return priorityMap[priorityText];
 }
 
-function sortTaskCardsByPriority() {
-    const container = document.querySelector('.tab-content'); // Define the container
-    container.innerHTML = ''; // Remove existing task cards
-    taskCardArray.sort((a, b) => {
+
+
+ export function sortTaskCardsByPriority() {
+    const container = document.querySelector('.tab-content#' + currentProjectTabID); // Use the current project ID
+    const taskCardsInProject = taskCardArray.filter(taskCard => taskCard.parentElement.id === currentProjectTabID);
+    taskCardsInProject.sort((a, b) => {
         const priorityA = getPriorityValue(a);
         const priorityB = getPriorityValue(b);
-        return priorityB - priorityA; // Sorting in descending order of priority level
+        return priorityB - priorityA;
     });
 
-    // Clear the container before appending the sorted task cards
+    container.innerHTML = '';
 
-    // Append the sorted task cards to the container
-    taskCardArray.forEach(taskCard => {
+    taskCardsInProject.forEach(taskCard => {
         container.appendChild(taskCard);
     });
 }
-
 
 function removeFromTaskCardArray(taskCard) {
     const index = taskCardArray.indexOf(taskCard);
@@ -396,13 +404,14 @@ function createTrashIconClickHandler(originalTaskCard, clonedTaskCard) {
     };
 }
 
-
+const clonedProjectsArray = []
 export function moveProjectsToProjectsTab() {
-    const projectTabContent = document.getElementById('project-tab-content');
+    clonedProjectsArray.length = 0;
 
     for (let i = 0; i < projectTabs.length; i++) {
         const projects = projectTabs[i];
         const clonedProject = projects.cloneNode(true);
+        const projectName = clonedProject.textContent;
         const tabID = clonedProject.id; // Get the tabID from the cloned project button
         const tabContent = contentArray[i]; // Retrieve tabContent from contentArray
         clonedProject.addEventListener('click', () => {
@@ -414,11 +423,28 @@ export function moveProjectsToProjectsTab() {
             appendFormToContent();
             tabContent.style.display = 'block';
             createButtonForTab();
+            addProjectNameToContent(projectName); 
             document.getElementById('content').appendChild(tabContent);
             currentProjectTabID = tabID;
             console.log(currentProjectTabID);
         });
 
-        projectTabContent.appendChild(clonedProject);
+        // Add cloned project to the array
+        clonedProjectsArray.push(clonedProject);
+        console.log(clonedProjectsArray);
     }
+    displayClonedProjectsInTab()
+}
+
+export function displayClonedProjectsInTab() {
+    const projectTabContent = document.getElementById('project-tab-content');
+
+    // Clear existing content in the tab
+    projectTabContent.innerHTML = '';
+
+    // Iterate through the cloned projects array and append each project to the tab
+    clonedProjectsArray.forEach(clonedProject => {
+        projectTabContent.appendChild(clonedProject);
+    });
+    console.log(clonedProjectsArray);
 }
