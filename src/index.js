@@ -3,9 +3,13 @@ import { openForm, closeForm, getSubmittedName, createProjectTab, getSubmittedFo
 import { showToday } from "./today";
 import { showProject } from "./projects";
 import { appendFormToContent } from "./DOM";
+import { appendIncomingToContent } from "./DOM";
 
 // Call the functions
 showIncoming();
+document.addEventListener("DOMContentLoaded", function() {
+    appendIncomingToContent();
+});
 showToday()
 showProject()
 openForm();

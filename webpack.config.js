@@ -38,7 +38,8 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: 'src/style.css', to: 'style.css' },
-                { from: 'src/images', to: 'images' } // Add this line for copying image files
+                { from: 'src/images', to: 'images' }, // Add this line for copying image files
+                { from: 'src/fonts', to: 'fonts' }
             ],
         }),
     ],
